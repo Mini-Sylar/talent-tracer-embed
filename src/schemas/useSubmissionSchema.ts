@@ -14,11 +14,33 @@ export function useSubmissionSchema() {
   const { isSubmitting, handleSubmit, values, errors, handleReset } = useForm<SubmissionSchema>({
     validationSchema: toTypedSchema(
       z.object({
-        name: z.string().min(3).max(50),
-        email: z.string().email(),
-        file: z.instanceof(File).refine((file) => file.size < maxFileSize, {
-          message: `File must be less than ${maxFileSize / 1024 / 1024}MB`
-        })
+        name: z
+          .string({
+            required_error: 'Name is required'
+          })
+          .min(3, {
+            message: 'Name must be at least 3 characters'
+          })
+          .max(50, {
+            message: 'Name must be at most 50 characters'
+          }),
+        email: z
+          .string({
+            required_error: 'Email is required'
+          })
+          .email({
+            message: 'Enter a valid email'
+          }),
+        file: z
+          .instanceof(File, {
+            message: 'File is required'
+          })
+          .refine((file: File) => file.type != 'pdf', {
+            message: 'Only PDFs are allowed'
+          })
+          .refine((file: File) => file.size < maxFileSize, {
+            message: `File must be less than ${maxFileSize / 1024 / 1024}MB`
+          })
       })
     )
   })

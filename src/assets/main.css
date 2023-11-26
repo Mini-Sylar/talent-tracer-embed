@@ -1,1 +1,24 @@
 @import './base.css';
+
+.main-container {
+  width: min(98%, 1200px);
+  margin: 0 auto;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.form-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  margin-bottom: 0.5rem;
+}
