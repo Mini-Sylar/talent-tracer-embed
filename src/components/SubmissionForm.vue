@@ -21,7 +21,7 @@
       <small id="text-error" class="p-error">{{ errors.email || '&nbsp;' }}</small>
     </div>
     <div class="form-field">
-      <label for="file" class="form-label">File</label>
+      <label for="file" class="form-label">Resume/CV</label>
       <FileUpload
         id="file"
         :class="{ 'p-invalid': errors.file }"
@@ -45,9 +45,10 @@
 
 <script setup lang="ts">
 import { useSubmissionSchema } from '@/schemas/useSubmissionSchema'
+import { useToast } from 'primevue/usetoast'
 
+const toast = useToast()
 const { email, errors, file, isSubmitting, name, onSubmit } = useSubmissionSchema()
-
 const onSelect = (event: any) => {
   file.value = event.files[0] as File
 }
@@ -55,8 +56,20 @@ const onSelect = (event: any) => {
 const handleSubmit = async () => {
   try {
     await onSubmit()
-  } catch (error) {
-    console.log(error)
+    toast.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Your submission has been received.',
+      life: 4000
+    })
+  } catch (error: any) {
+    if (error.type == 'frontend_error') return
+    toast.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'There was an issue processing your request, try again later.',
+      life: 4000
+    })
   }
 }
 </script>

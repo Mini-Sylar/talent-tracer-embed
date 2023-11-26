@@ -53,8 +53,12 @@ export function useSubmissionSchema() {
     await new Promise((resolve) => setTimeout(resolve, 2000))
   }
 
-  function handleFailure(values: any) {
-    console.log(values)
+  function handleFailure(errors: any) {
+    console.log(errors)
+    throw {
+      type: 'frontend_error',
+      errors
+    }
   }
 
   const onSubmit = handleSubmit(handleSuccess, handleFailure)
