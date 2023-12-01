@@ -51,7 +51,6 @@ export function useSubmissionSchema() {
   }
 
   function handleFailure(errors: any) {
-    console.log(errors)
     throw {
       type: 'frontend_error',
       errors
