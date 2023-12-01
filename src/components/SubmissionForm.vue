@@ -31,6 +31,7 @@
         chooseLabel="Select File"
         :auto="false"
         :showUploadButton="true"
+        :fileLimit="1"
         @select="onSelect"
       >
         <template #header="{ chooseCallback, files }">
@@ -48,7 +49,13 @@
           <div v-if="files.length > 0">
             <div>
               <div
-                style="display: flex; justify-content: space-evenly; align-items: center"
+                style="
+                  display: flex;
+                  justify-content: space-evenly;
+                  align-items: center;
+                  flex-wrap: wrap;
+                  gap: 1rem;
+                "
                 v-for="(file, index) of files"
                 :key="file.name + file.type + file.size"
               >
