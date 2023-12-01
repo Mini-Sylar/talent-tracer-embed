@@ -1,17 +1,13 @@
 import { z } from 'zod'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useField, useForm } from 'vee-validate'
-
-interface SubmissionSchema {
-  name: string
-  email: string
-  file: File
-}
+import { type ApplicationData } from '@/types/submit_application.type'
+import { useApplicationStore } from '@/stores/application'
 
 const maxFileSize = 5 * 1024 * 1024 // 5MB
 
 export function useSubmissionSchema() {
-  const { isSubmitting, handleSubmit, values, errors, handleReset } = useForm<SubmissionSchema>({
+  const { isSubmitting, handleSubmit, values, errors, handleReset } = useForm<ApplicationData>({
     validationSchema: toTypedSchema(
       z.object({
         name: z
@@ -45,16 +41,20 @@ export function useSubmissionSchema() {
     )
   })
 
-  const { value: name } = useField<SubmissionSchema['name']>('name')
-  const { value: email } = useField<SubmissionSchema['email']>('email')
-  const { value: file } = useField<SubmissionSchema['file']>('file')
+  const { value: name } = useField<ApplicationData['name']>('name')
+  const { value: email } = useField<ApplicationData['email']>('email')
+  const { value: file } = useField<ApplicationData['file']>('file')
 
-  async function handleSuccess() {
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+  async function handleSuccess(data: typeof values) {
+    const response = await useApplicationStore().submitApplication(data)
+    return Promise.resolve(response)
   }
 
-  function handleFailure(values: any) {
-    console.log(values)
+  function handleFailure(errors: any) {
+    throw {
+      type: 'frontend_error',
+      errors
+    }
   }
 
   const onSubmit = handleSubmit(handleSuccess, handleFailure)
