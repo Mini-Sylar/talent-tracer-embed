@@ -27,3 +27,5 @@ coverage
 *.sln
 *.sw?
 .env
+components.d.ts
+components.d.ts

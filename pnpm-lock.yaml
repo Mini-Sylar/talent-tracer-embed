@@ -14,9 +14,6 @@ dependencies:
   pinia:
     specifier: ^2.1.7
     version: 2.1.7(typescript@5.2.2)(vue@3.3.9)
-  primeicons:
-    specifier: ^6.0.1
-    version: 6.0.1
   primevue:
     specifier: ^3.41.1
     version: 3.41.1(vue@3.3.9)
@@ -2083,10 +2080,6 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
     dev: true
-
-  /primeicons@6.0.1:
-    resolution: {integrity: sha512-KDeO94CbWI4pKsPnYpA1FPjo79EsY9I+M8ywoPBSf9XMXoe/0crjbUK7jcQEDHuc0ZMRIZsxH3TYLv4TUtHmAA==}
-    dev: false
 
   /primevue@3.41.1(vue@3.3.9):
     resolution: {integrity: sha512-+RDGLsw7ktS2Jz/mptPwwbW/YI5E0u1tWYustlG745FFdX3o1/Dxs47hdnvo22wysPUQr1mdh/uznsKJZMV7fw==}
