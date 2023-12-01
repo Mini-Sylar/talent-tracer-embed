@@ -44,13 +44,6 @@ export interface Database {
             isOneToOne: false
             referencedRelation: "job_opening"
             referencedColumns: ["user_external_key"]
-          },
-          {
-            foreignKeyName: "applicant_pdf_url_fkey"
-            columns: ["pdf_url"]
-            isOneToOne: false
-            referencedRelation: "objects"
-            referencedColumns: ["id"]
           }
         ]
       }
