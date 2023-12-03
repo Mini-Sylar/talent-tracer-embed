@@ -1,6 +1,5 @@
 <template>
   <main class="main-container">
-    <!-- <CustomMode v-if="customResponse == true" /> -->
     <ApplicationView></ApplicationView>
     <Toast />
   </main>
@@ -8,40 +7,12 @@
 
 <script setup lang="ts">
 import ApplicationView from '@/views/ApplicationView.vue'
-// import CustomMode from './components/CustomMode.vue'
 import Toast from 'primevue/toast'
-// import { watch, ref } from 'vue'
-// import { useToast } from 'primevue/usetoast'
+import { usePrimeVue } from 'primevue/config'
 
-// const toast = useToast()
-// const URLParams = new URLSearchParams(window.location.search)
-// const customResponse = ref<boolean>()
+const prime = usePrimeVue()
 
-// watch(
-//   () => URLParams.get('custom_response'),
-//   async (value) => {
-//     if (value) {
-//       if (value === 'true') {
-//         try {
-//           customResponse.value = true
-//           await useApplicationStore().submitApplication()
-//         } catch (error: any) {
-//           toast.add({
-//             severity: 'error',
-//             summary: 'Error',
-//             detail: error.message,
-//             life: 3000
-//           })
-//           return
-//         }
-//       } else {
-//         customResponse.value = false
-//       }
-//       // call submission form method
-//     }
-//   },
-//   { immediate: true }
-// )
+prime.changeTheme('md-dark-indigo', 'md-light-indigo', 'theme-link', () => {})
 </script>
 
-<style scoped></style>
+<style></style>
