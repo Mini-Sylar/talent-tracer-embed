@@ -1,13 +1,12 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { supabase } from '@/services/supabaseClient'
 import { type ApplicationData } from '@/types/submit_application.type'
-
+import { useAppStateStore } from '@/stores/app_state'
 export const useApplicationStore = defineStore('application', () => {
   function checkParams() {
-    const urlParams = new URLSearchParams(window.location.search)
-    const jobId = urlParams.get('job_id')
-    const isCustomResponse = urlParams.get('custom_response')
-    const customJSON = urlParams.get('application_json')
+    const jobId = useAppStateStore().job_id
+    const isCustomResponse = useAppStateStore().isCustomResponse
+    const customJSON = useAppStateStore().customJSON
     if (!jobId) {
       throw new Error('Job ID is required')
     }
