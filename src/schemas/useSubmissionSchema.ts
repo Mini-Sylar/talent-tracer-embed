@@ -7,7 +7,7 @@ import { useApplicationStore } from '@/stores/application'
 const maxFileSize = 5 * 1024 * 1024 // 5MB
 
 export function useSubmissionSchema() {
-  const { isSubmitting, handleSubmit, values, errors, handleReset } = useForm<ApplicationData>({
+  const { isSubmitting, handleSubmit, values, errors, resetForm } = useForm<ApplicationData>({
     validationSchema: toTypedSchema(
       z.object({
         name: z
@@ -47,6 +47,7 @@ export function useSubmissionSchema() {
 
   async function handleSuccess(data: typeof values) {
     const response = await useApplicationStore().submitApplication(data)
+    resetForm()
     return Promise.resolve(response)
   }
 
@@ -64,7 +65,6 @@ export function useSubmissionSchema() {
     onSubmit,
     values,
     errors,
-    handleReset,
     name,
     email,
     file

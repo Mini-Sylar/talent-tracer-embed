@@ -20,6 +20,7 @@ declare module 'vue' {
     IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
     InputText: typeof import('primevue/inputtext')['default']
     JobDescription: typeof import('./src/components/JobDescription.vue')['default']
+    Message: typeof import('primevue/message')['default']
     ProgressBar: typeof import('primevue/progressbar')['default']
     Skeleton: typeof import('primevue/skeleton')['default']
     SubmissionForm: typeof import('./src/components/SubmissionForm.vue')['default']
