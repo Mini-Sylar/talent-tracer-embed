@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 style="text-align: center;">Apply Now</h2>
+    <h2 style="text-align: center">Apply Now</h2>
     <form class="form-container">
       <div class="form-field">
         <label for="name" class="form-label">Name</label>
@@ -25,6 +25,7 @@
       <div class="form-field">
         <label for="file" class="form-label">Resume/CV</label>
         <FileUpload
+          ref="fileUpload"
           id="file"
           :class="{ 'p-invalid': errors.file }"
           name="file[]"
@@ -66,7 +67,11 @@
                     <div>{{ formatSize(file.size) }}</div>
                   </div>
                   <Badge value="File Ready" severity="success" />
-                  <Button @click="removeFileCallback(index)" label="Remove File" severity="danger" />
+                  <Button
+                    @click="removeFileCallback(index)"
+                    label="Remove File"
+                    severity="danger"
+                  />
                 </div>
               </div>
             </div>
@@ -85,10 +90,14 @@
 import { useSubmissionSchema } from '@/schemas/useSubmissionSchema'
 import { useToast } from 'primevue/usetoast'
 import { usePrimeVue } from 'primevue/config'
+import { ref } from 'vue'
 
 const toast = useToast()
 const prime = usePrimeVue()
 const { email, errors, file, isSubmitting, name, onSubmit } = useSubmissionSchema()
+
+const fileUpload = ref()
+
 const onSelect = (event: any) => {
   file.value = event.files[0] as File
 }
@@ -117,6 +126,7 @@ const handleSubmit = async () => {
       detail: 'Your submission has been received.',
       life: 4000
     })
+    fileUpload.value.clear()
   } catch (error: any) {
     if (error.type == 'frontend_error') return
     toast.add({
