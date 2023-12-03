@@ -1,9 +1,9 @@
-# talent-tracer-embed
+# talent-tracer-embed 🟩
 
-Embed Talent-Tracer widget right into your website.
+Embed Talent-Tracer widget right into your website!.
 
 ## Demo
-- [Demo](https://prismic-vue.vercel.app/about#talent-tracer)
+- [Talent-Tracer Embed Demo](https://prismic-vue.vercel.app/about#talent-tracer) 🔗
 
 ## Installation
 - Add the following script tag to your website:
