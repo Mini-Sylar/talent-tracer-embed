@@ -1,46 +1,78 @@
 # talent-tracer-embed
 
-This template should help get you started developing with Vue 3 in Vite.
+Embed Talent-Tracer widget right into your website.
 
-## Recommended IDE Setup
+## Demo
+- [Demo](https://prismic-vue.vercel.app/about#talent-tracer)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-pnpm install
+## Installation
+- Add the following script tag to your website:
+```html
+<iframe src="https://talent-tracer-embed.vercel.app/?job_id=<JOB-ID>&<OPTIONS>" width="100%" height="100%" frameborder="0"></iframe>
 ```
-
-### Compile and Hot-Reload for Development
-
-```sh
-pnpm dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-pnpm build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-pnpm lint
-```
+ ### Params
+ - `job_id`: **(required)** Your Talent-Tracer external job token. You can get it from [here](https://talent-tracer.vercel.app/).
+ 
+ - `show_description` **(optional)**: Set to `true` to show job description. Default: `false`.
+ - `theme`: **(optional)**: Customize the widget theme. Options available are:
+    - lara-light-green **(default)**
+    - lara-light-blue
+    - arya-blue
+    - arya-green
+    - arya-orange
+    - arya-purple
+    - bootstrap4-dark-blue
+    - bootstrap4-dark-purple
+    - bootstrap4-light-blue
+    - bootstrap4-light-purple
+    - fluent-light
+    - lara-dark-amber
+    - lara-dark-blue
+    - lara-dark-cyan
+    - lara-dark-green
+    - lara-dark-indigo
+    - lara-dark-pink
+    - lara-dark-purple
+    - lara-dark-teal
+    - lara-light-amber
+    - lara-light-blue
+    - lara-light-cyan
+    - lara-light-green
+    - lara-light-indigo
+    - lara-light-pink
+    - lara-light-purple
+    - lara-light-teal
+    - luna-amber
+    - luna-blue
+    - luna-green
+    - luna-pink
+    - md-dark-deeppurple
+    - md-dark-indigo
+    - md-light-deeppurple
+    - md-light-indigo
+    - mdc-dark-deeppurple
+    - mdc-dark-indigo
+    - mdc-light-deeppurple
+    - mdc-light-indigo
+    - mira
+    - nano
+    - nova
+    - nova-accent
+    - nova-alt
+    - nova-vue
+    - rhea
+    - saga-blue
+    - saga-green
+    - saga-orange
+    - saga-purple
+    - soho-dark
+    - soho-light
+    - tailwind-light
+    - vela-blue
+    - vela-green
+    - vela-orange
+    - vela-purple
+    - viva-dark
+    - viva-light
+    
+    
