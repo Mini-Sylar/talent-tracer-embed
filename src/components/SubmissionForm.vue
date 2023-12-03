@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="submission-container">
     <h2 style="text-align: center">Apply Now</h2>
     <form class="form-container">
       <div class="form-field">
@@ -139,4 +139,10 @@ const handleSubmit = async () => {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.submission-container{
+  width: min(100%, 800px);
+  margin: 0 auto;
+}
+
+</style>
