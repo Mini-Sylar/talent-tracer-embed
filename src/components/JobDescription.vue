@@ -1,7 +1,10 @@
 <template>
   <div>
     <div>
-      <h1>Job Description For <span style="margin-inline: .5rem;">"{{ currentOpening[0].title }}</span>"</h1>
+      <h1 class="job-heading">
+        Open Position: <span style="margin-inline: 0.5rem">"{{ currentOpening[0].title }}</span
+        >"
+      </h1>
     </div>
     <div v-html="currentOpening[0].description"></div>
     <div class="location">
@@ -37,7 +40,13 @@ const { currentOpening } = storeToRefs(jobOpeningStore)
   padding: 0;
 }
 
-.p-tag{
+.p-tag {
   text-transform: capitalize;
+}
+
+@media screen and (max-width: 769px) {
+  .job-heading {
+    text-align: center;
+  }
 }
 </style>
