@@ -6,19 +6,17 @@
         >"
       </h1>
     </div>
-    <div v-html="currentOpening[0].description"></div>
-    <div class="location">
-      <h2>Job Type</h2>
-      <Tag severity="info" :value="currentOpening[0].location"></Tag>
-    </div>
     <div class="keywords">
-      <h2>Keywords</h2>
       <ul class="keyword-container">
         <li class="keyword" v-for="keyword in currentOpening[0].keywords" :key="keyword">
           <Tag :value="keyword"></Tag>
         </li>
       </ul>
     </div>
+    <div class="location">
+      <Tag severity="warning" :value="currentOpening[0].location"></Tag>
+    </div>
+    <div v-html="currentOpening[0].description"></div>
   </div>
 </template>
 
