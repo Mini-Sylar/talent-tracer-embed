@@ -7,8 +7,9 @@ export const useAppStateStore = defineStore('app_state', () => {
   const isCustomResponse = computed(() => urlParams.value.get('custom_response'))
   const customJSON = computed(() => urlParams.value.get('application_json'))
   const showDescription = computed(() => urlParams.value.get('show_description'))
+  const theme = computed(() => urlParams.value.get('theme') || 'lara-light-green')
 
-  return { job_id, isCustomResponse, customJSON, showDescription }
+  return { job_id, isCustomResponse, customJSON, showDescription, theme }
 })
 
 if (import.meta.hot) {
