@@ -1,4 +1,4 @@
-import { useForm, useField } from 'vee-validate'
+import { useForm, useField, type FieldContext } from 'vee-validate'
 import { z } from 'zod'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useAppStateStore } from '@/stores/app_state'
@@ -45,10 +45,10 @@ export const useCustomSubmissionSchema = () => {
   const fields = reactive(
     customFields.reduce(
       (fields, field) => {
-        fields[field.name] = useField(field.name)
+        fields[field.name] = useField<string>(field.name)
         return fields
       },
-      {} as Record<string, ReturnType<typeof useField>>
+      {} as Record<string, FieldContext<string>>
     )
   )
 
