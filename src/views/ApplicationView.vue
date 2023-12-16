@@ -30,15 +30,15 @@
       </Suspense>
     </div>
     <div>
-      <SubmissionForm></SubmissionForm>
+      <BasicSubmissionForm></BasicSubmissionForm>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onErrorCaptured, ref } from 'vue'
-import SubmissionForm from '@/components/SubmissionForm.vue'
-import JobDescription from '@/components/JobDescription.vue'
+import BasicSubmissionForm from '@/components/BasicSubmissionForm.vue'
+import JobDescription from '@/components/other/JobDescription.vue'
 import { useAppStateStore } from '@/stores/app_state'
 import { storeToRefs } from 'pinia'
 import { useToast } from 'primevue/usetoast'

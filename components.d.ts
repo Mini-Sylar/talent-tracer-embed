@@ -8,11 +8,12 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Badge: typeof import('primevue/badge')['default']
+    BasicSubmissionForm: typeof import('./src/components/BasicSubmissionForm.vue')['default']
     Button: typeof import('primevue/button')['default']
     CustomMode: typeof import('./src/components/CustomMode.vue')['default']
     FileUpload: typeof import('primevue/fileupload')['default']
     InputText: typeof import('primevue/inputtext')['default']
-    JobDescription: typeof import('./src/components/JobDescription.vue')['default']
+    JobDescription: typeof import('./src/components/other/JobDescription.vue')['default']
     Skeleton: typeof import('primevue/skeleton')['default']
     SubmissionForm: typeof import('./src/components/SubmissionForm.vue')['default']
     Tag: typeof import('primevue/tag')['default']
