@@ -7,8 +7,13 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ApplicantName: typeof import('./src/components/basic/ApplicantName.vue')['default']
     Badge: typeof import('primevue/badge')['default']
+    BasicEmail: typeof import('./src/components/basic/BasicEmail.vue')['default']
+    BasicFileUpload: typeof import('./src/components/basic/BasicFileUpload.vue')['default']
+    BasicName: typeof import('./src/components/basic/BasicName.vue')['default']
     BasicSubmissionForm: typeof import('./src/components/BasicSubmissionForm.vue')['default']
+    BasicSubmit: typeof import('./src/components/basic/BasicSubmit.vue')['default']
     Button: typeof import('primevue/button')['default']
     CustomMode: typeof import('./src/components/CustomMode.vue')['default']
     FileUpload: typeof import('primevue/fileupload')['default']

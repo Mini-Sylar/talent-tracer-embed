@@ -30,7 +30,8 @@
       </Suspense>
     </div>
     <div>
-      <BasicSubmissionForm></BasicSubmissionForm>
+      <CustomMode v-if="isCustomMode"></CustomMode>
+      <BasicSubmissionForm v-else></BasicSubmissionForm>
     </div>
   </div>
 </template>
@@ -39,6 +40,7 @@
 import { onErrorCaptured, ref } from 'vue'
 import BasicSubmissionForm from '@/components/BasicSubmissionForm.vue'
 import JobDescription from '@/components/other/JobDescription.vue'
+import CustomMode from '@/components/CustomMode.vue'
 import { useAppStateStore } from '@/stores/app_state'
 import { storeToRefs } from 'pinia'
 import { useToast } from 'primevue/usetoast'
@@ -46,7 +48,7 @@ import { useToast } from 'primevue/usetoast'
 const errorState = ref(false)
 const appStateStore = useAppStateStore()
 const toast = useToast()
-const { showDescription } = storeToRefs(appStateStore)
+const { showDescription, isCustomMode } = storeToRefs(appStateStore)
 
 onErrorCaptured((error) => {
   toast.add({

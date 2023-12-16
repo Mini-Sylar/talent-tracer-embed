@@ -5,17 +5,17 @@ import { useAppStateStore } from '@/stores/app_state'
 export const useApplicationStore = defineStore('application', () => {
   function checkParams() {
     const jobId = useAppStateStore().job_id
-    const isCustomResponse = useAppStateStore().isCustomResponse
+    const isCustomMode = useAppStateStore().isCustomMode
     if (!jobId) {
       throw new Error('Job ID is required')
     }
-    if (isCustomResponse && isCustomResponse.length >= 0) {
+    if (isCustomMode && isCustomMode.length >= 0) {
       throw new Error('Custom response is required')
     }
 
     return {
       jobId,
-      isCustomResponse,
+      isCustomMode
     }
   }
 
