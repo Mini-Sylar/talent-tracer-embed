@@ -6,18 +6,16 @@ export const useApplicationStore = defineStore('application', () => {
   function checkParams() {
     const jobId = useAppStateStore().job_id
     const isCustomResponse = useAppStateStore().isCustomResponse
-    const customJSON = useAppStateStore().customJSON
     if (!jobId) {
       throw new Error('Job ID is required')
     }
-    if (isCustomResponse && isCustomResponse.length >= 0 && !customJSON) {
+    if (isCustomResponse && isCustomResponse.length >= 0) {
       throw new Error('Custom response is required')
     }
 
     return {
       jobId,
       isCustomResponse,
-      customJSON
     }
   }
 
@@ -33,7 +31,7 @@ export const useApplicationStore = defineStore('application', () => {
 
   async function submitApplication(application_info: ApplicationData) {
     try {
-      const { jobId, customJSON } = checkParams()
+      const { jobId } = checkParams()
       const formData = new FormData()
       formData.append('file', application_info.file)
       const { data: file_upload, error: file_upload_error } = await supabase.storage
@@ -54,7 +52,7 @@ export const useApplicationStore = defineStore('application', () => {
             name: application_info.name,
             email: application_info.email,
             pdf_url: file_upload.path,
-            extra_response: customJSON || null
+            extra_response: null
           }
         ])
       if (applicant_error) {
