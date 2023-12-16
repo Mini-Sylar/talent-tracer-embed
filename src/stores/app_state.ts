@@ -11,7 +11,6 @@ export const useAppStateStore = defineStore('app_state', () => {
       urlParams.value.get('custom_fields') &&
       JSON.parse(urlParams.value.get('custom_fields') as string)
   )
-  console.log(customFields.value)
   const showDescription = computed(() => urlParams.value.get('job_description'))
   const theme = computed(() => urlParams.value.get('theme') || 'lara-light-green')
 

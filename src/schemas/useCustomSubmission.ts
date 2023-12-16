@@ -54,8 +54,6 @@ export const useCustomSubmissionSchema = () => {
 
   const onSubmit = handleSubmit(
     async (values) => {
-      // Handle form submission
-      console.log(values)
       const response = await useApplicationStore().submitCustomApplication(values)
       resetForm()
       return response

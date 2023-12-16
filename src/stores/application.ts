@@ -11,7 +11,6 @@ export const useApplicationStore = defineStore('application', () => {
     if (!job_id) {
       throw new Error('Job ID is required')
     }
-    console.log(isCustomMode)
     if (isCustomMode == 'true' && Object.keys(customFields).length == 0) {
       throw new Error('Custom response is required')
     }
