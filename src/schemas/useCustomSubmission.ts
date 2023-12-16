@@ -6,8 +6,10 @@ import { reactive } from 'vue'
 
 type CustomField = Array<{
   name: string
-  type: 'input' | 'select' | 'radio' | 'checkbox'
+  type: 'input' | 'file' | 'radio' | 'checkbox'
 }>
+
+const maxFileSize = 5 * 1024 * 1024 // 5MB
 export const useCustomSubmissionSchema = () => {
   const appState = useAppStateStore()
   const customFields = appState.customFields as CustomField
@@ -17,6 +19,18 @@ export const useCustomSubmissionSchema = () => {
       switch (field.type) {
         case 'input':
           schemas[field.name] = z.string()
+          break
+        case 'file':
+          schemas[field.name] = z
+            .instanceof(File, {
+              message: 'File is required'
+            })
+            .refine((file: File) => file.type != 'pdf', {
+              message: 'Only PDFs are allowed'
+            })
+            .refine((file: File) => file.size < maxFileSize, {
+              message: `File must be less than ${maxFileSize / 1024 / 1024}MB`
+            })
           break
         // Add cases for other field types as needed
       }

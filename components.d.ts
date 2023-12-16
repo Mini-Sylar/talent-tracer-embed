@@ -15,6 +15,7 @@ declare module 'vue' {
     BasicSubmissionForm: typeof import('./src/components/BasicSubmissionForm.vue')['default']
     BasicSubmit: typeof import('./src/components/basic/BasicSubmit.vue')['default']
     Button: typeof import('primevue/button')['default']
+    CustomFileUpload: typeof import('./src/components/custom/CustomFileUpload.vue')['default']
     CustomMode: typeof import('./src/components/CustomMode.vue')['default']
     FileUpload: typeof import('primevue/fileupload')['default']
     InputText: typeof import('primevue/inputtext')['default']

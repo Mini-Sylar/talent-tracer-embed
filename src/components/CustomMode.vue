@@ -11,7 +11,13 @@
           :placeholder="field.name"
           v-model="fields[field.name].value"
         ></InputText>
-        {{ fields[field.name].value }}
+        <CustomFileUpload
+          v-else-if="field.type == 'file'"
+          :class="{ 'p-invalid': errors[field.name] }"
+          :placeholder="field.name"
+          v-model="fields[field.name].value"
+          :errors="errors[field.name]"
+        ></CustomFileUpload>
         <small class="p-error">{{ errors[field.name] || '&nbsp;' }}</small>
       </div>
       <div class="form-field">
@@ -26,10 +32,11 @@ import { useAppStateStore } from '@/stores/app_state'
 import { storeToRefs } from 'pinia'
 import { type ComputedRef } from 'vue'
 import { useCustomSubmissionSchema } from '@/schemas/useCustomSubmission'
+import CustomFileUpload from '@/components/custom/CustomFileUpload.vue'
 
 type CustomField = Array<{
   name: string
-  type: 'input' | 'select' | 'radio' | 'checkbox'
+  type: 'input' | 'file' | 'radio' | 'checkbox'
 }>
 const appState = useAppStateStore()
 const { customFields } = storeToRefs(appState) as unknown as {

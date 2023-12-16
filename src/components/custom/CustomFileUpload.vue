@@ -1,6 +1,5 @@
 <template>
   <div class="form-field">
-    <label for="file" class="form-label">Resume/CV</label>
     <FileUpload
       ref="fileUpload"
       id="file"
@@ -57,11 +56,12 @@
 <script setup lang="ts">
 import { usePrimeVue } from 'primevue/config'
 import { ref } from 'vue'
-import { inject } from 'vue'
-import { type BasicApplicationSchemaType } from '@/types/basic_apply.types'
 
-const file = inject<BasicApplicationSchemaType['file']>('file')
-const errors = inject<BasicApplicationSchemaType['errors']>('errors')
+const file = defineModel()
+const errors = defineProps({
+  type: Object,
+  default: () => ({})
+})
 const prime = usePrimeVue()
 const fileUpload = ref()
 const onSelect = (event: any) => {
