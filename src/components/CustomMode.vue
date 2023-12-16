@@ -1,34 +1,69 @@
 <template>
-  <div style="display: grid; place-content: center">
-    <h2>
-      Make a <Tag>GET</Tag> request to <Tag severity="info">{{ currentLocation }}</Tag> with the
-      following Params:
-    </h2>
-    <code><Tag severity="warning">job_id:</Tag> xxxxxx-xx-xxxx-xxxx</code>
-    <br />
-    <code><Tag severity="warning">custom_response</Tag>: true</code>
-    <br />
-    <code><Tag severity="warning">application_json</Tag>: {stringified json} </code>
-    <div>
-      <h3>Example:</h3>
-      <code>
-        <Tag severity="info">{{ currentLocation }}</Tag>
-        <Tag severity="success">?job_id=xxxxxx-xx-xxxx-xxxx</Tag>
-        <Tag severity="warning">&custom_response=true</Tag>
-        <Tag severity="danger">&application_json='{"name":"UserName",email:"example@you.com"}'</Tag>
-      </code>
-    </div>
+  <div>
+    <form class="form-container">
+      <div class="form-field" v-for="(field, index) in customFields" :key="index">
+        <label class="form-label" :for="field.name" style="text-transform: capitalize">{{
+          field.name
+        }}</label>
+        <InputText
+          v-if="field.type == 'input'"
+          :class="{ 'p-invalid': errors[field.name] }"
+          :placeholder="field.name"
+          v-model="fields[field.name].value"
+        ></InputText>
+        <CustomFileUpload
+          v-else-if="field.type == 'file'"
+          :class="{ 'p-invalid': errors[field.name] }"
+          :placeholder="field.name"
+          v-model="fields[field.name].value"
+          :errors="errors[field.name]"
+        ></CustomFileUpload>
+        <!-- set up other components -->
+        <small class="p-error">{{ errors[field.name] || '&nbsp;' }}</small>
+      </div>
+      <div class="form-field">
+        <Button label="Submit" @click="handleSubmit" :loading="isSubmitting" />
+      </div>
+    </form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useAppStateStore } from '@/stores/app_state'
+import { storeToRefs } from 'pinia'
+import { type ComputedRef } from 'vue'
+import { useCustomSubmissionSchema } from '@/schemas/useCustomSubmission'
+import CustomFileUpload from '@/components/custom/CustomFileUpload.vue'
+import { type CustomField } from '@/types/custom_apply.types'
+import { useToast } from 'primevue/usetoast'
 
-const currentLocation = ref(window.location.origin)
+const toast = useToast()
+const appState = useAppStateStore()
+const { customFields } = storeToRefs(appState) as unknown as {
+  customFields: ComputedRef<CustomField>
+}
+
+const { errors, fields, onSubmit, isSubmitting } = useCustomSubmissionSchema()
+
+const handleSubmit = async () => {
+  try {
+    onSubmit && (await onSubmit())
+    toast.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Your submission has been received.',
+      life: 4000
+    })
+  } catch (error: any) {
+    if (error.type == 'frontend_error') return
+    toast.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: error?.message || 'An error occurred while submitting your form.',
+      life: 4000
+    })
+  }
+}
 </script>
 
-<style scoped>
-code {
-  display: block;
-}
-</style>
+<style scoped></style>
