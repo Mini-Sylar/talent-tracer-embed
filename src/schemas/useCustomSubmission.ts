@@ -3,11 +3,8 @@ import { z } from 'zod'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useAppStateStore } from '@/stores/app_state'
 import { reactive } from 'vue'
-
-type CustomField = Array<{
-  name: string
-  type: 'input' | 'file' | 'radio' | 'checkbox'
-}>
+import { type CustomField } from '@/types/custom_apply.types'
+import { useApplicationStore } from '@/stores/application'
 
 const maxFileSize = 5 * 1024 * 1024 // 5MB
 export const useCustomSubmissionSchema = () => {
@@ -55,11 +52,21 @@ export const useCustomSubmissionSchema = () => {
     )
   )
 
-  const onSubmit = handleSubmit(async (values) => {
-    // Handle form submission
-    console.log(values)
-    resetForm()
-  })
+  const onSubmit = handleSubmit(
+    async (values) => {
+      // Handle form submission
+      console.log(values)
+      const response = await useApplicationStore().submitCustomApplication(values)
+      resetForm()
+      return response
+    },
+    () => {
+      throw {
+        type: 'frontend_error',
+        errors
+      }
+    }
+  )
 
   return {
     onSubmit,

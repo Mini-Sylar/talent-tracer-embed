@@ -18,10 +18,11 @@
           v-model="fields[field.name].value"
           :errors="errors[field.name]"
         ></CustomFileUpload>
+        <!-- set up other components -->
         <small class="p-error">{{ errors[field.name] || '&nbsp;' }}</small>
       </div>
       <div class="form-field">
-        <Button label="Submit" @click="onSubmit" :loading="isSubmitting" />
+        <Button label="Submit" @click="handleSubmit" :loading="isSubmitting" />
       </div>
     </form>
   </div>
@@ -33,17 +34,36 @@ import { storeToRefs } from 'pinia'
 import { type ComputedRef } from 'vue'
 import { useCustomSubmissionSchema } from '@/schemas/useCustomSubmission'
 import CustomFileUpload from '@/components/custom/CustomFileUpload.vue'
+import { type CustomField } from '@/types/custom_apply.types'
+import { useToast } from 'primevue/usetoast'
 
-type CustomField = Array<{
-  name: string
-  type: 'input' | 'file' | 'radio' | 'checkbox'
-}>
+const toast = useToast()
 const appState = useAppStateStore()
 const { customFields } = storeToRefs(appState) as unknown as {
   customFields: ComputedRef<CustomField>
 }
 
 const { errors, fields, onSubmit, isSubmitting } = useCustomSubmissionSchema()
+
+const handleSubmit = async () => {
+  try {
+    onSubmit && (await onSubmit())
+    toast.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Your submission has been received.',
+      life: 4000
+    })
+  } catch (error: any) {
+    if (error.type == 'frontend_error') return
+    toast.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: error?.message || 'An error occurred while submitting your form.',
+      life: 4000
+    })
+  }
+}
 </script>
 
 <style scoped></style>
