@@ -1,7 +1,7 @@
 <template>
   <div class="application-container">
     <div>
-      <Suspense v-if="showDescription != ''">
+      <Suspense v-if="showDescription && showDescription == 'true'">
         <template #default>
           <JobDescription></JobDescription>
         </template>
@@ -17,12 +17,12 @@
               <Skeleton width="100%" height="1rem"></Skeleton>
             </div>
           </div>
-          <div v-else>
+          <div v-else style="text-align: center">
             <h4>
               There was an issue displaying job description. <br />
               Check the following:
             </h4>
-            <ul>
+            <ul style="list-style: none">
               <li>is <Tag value="job_id" severity="warning" /> provided in your url?</li>
             </ul>
           </div>
@@ -67,7 +67,7 @@ onErrorCaptured((error) => {
   margin-bottom: 2rem;
 }
 
-.application-container{
+.application-container {
   display: flex;
   flex-direction: column;
   gap: 2rem;

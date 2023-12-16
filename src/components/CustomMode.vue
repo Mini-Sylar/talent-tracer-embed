@@ -6,7 +6,7 @@
     </h2>
     <code><Tag severity="warning">job_id:</Tag> xxxxxx-xx-xxxx-xxxx</code>
     <br />
-    <code><Tag severity="warning">custom_response</Tag>: true</code>
+    <code><Tag severity="warning">custom_mode</Tag>: true</code>
     <br />
     <code><Tag severity="warning">application_json</Tag>: {stringified json} </code>
     <div>
@@ -14,7 +14,7 @@
       <code>
         <Tag severity="info">{{ currentLocation }}</Tag>
         <Tag severity="success">?job_id=xxxxxx-xx-xxxx-xxxx</Tag>
-        <Tag severity="warning">&custom_response=true</Tag>
+        <Tag severity="warning">&custom_mode=true</Tag>
         <Tag severity="danger">&application_json='{"name":"UserName",email:"example@you.com"}'</Tag>
       </code>
     </div>

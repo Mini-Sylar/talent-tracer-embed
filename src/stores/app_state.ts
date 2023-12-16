@@ -4,9 +4,9 @@ export const useAppStateStore = defineStore('app_state', () => {
   const urlParams = ref(new URLSearchParams(window.location.search))
 
   const job_id = computed(() => urlParams.value.get('job_id'))
-  const isCustomResponse = computed(() => urlParams.value.get('custom_response'))
+  const isCustomResponse = computed(() => urlParams.value.get('custom_mode'))
   const customJSON = computed(() => urlParams.value.get('application_json'))
-  const showDescription = computed(() => urlParams.value.get('show_description'))
+  const showDescription = computed(() => urlParams.value.get('job_description'))
   const theme = computed(() => urlParams.value.get('theme') || 'lara-light-green')
 
   return { job_id, isCustomResponse, customJSON, showDescription, theme }
