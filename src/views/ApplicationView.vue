@@ -33,7 +33,6 @@
       <h2 style="text-align: center">Apply Now</h2>
       <CustomMode v-if="isCustomMode"></CustomMode>
       <BasicSubmissionForm v-else></BasicSubmissionForm>
-      <BasicSubmit></BasicSubmit>
     </div>
   </div>
 </template>
@@ -43,14 +42,13 @@ import { onErrorCaptured, ref } from 'vue'
 import BasicSubmissionForm from '@/components/BasicSubmissionForm.vue'
 import JobDescription from '@/components/other/JobDescription.vue'
 import CustomMode from '@/components/CustomMode.vue'
-import BasicSubmit from '@/components/basic/BasicSubmit.vue'
 import { useAppStateStore } from '@/stores/app_state'
 import { storeToRefs } from 'pinia'
 import { useToast } from 'primevue/usetoast'
 import { useSubmissionSchema } from '@/schemas/useSubmissionSchema'
 import { provide } from 'vue'
 
-const { email, errors, file, isSubmitting, name, onSubmit, values } = useSubmissionSchema()
+const { email, errors, file, isSubmitting, name, onSubmit } = useSubmissionSchema()
 
 provide('email', email)
 provide('errors', errors)
