@@ -1,5 +1,5 @@
 <template>
-  <div class="form-field" style="margin-top: 2rem;">
+  <div class="form-field" style="margin-top: 2rem">
     <Button type="submit" label="Submit" :loading="isSubmitting" @click="handleSubmit"></Button>
   </div>
 </template>
@@ -9,6 +9,7 @@ import { useToast } from 'primevue/usetoast'
 import { inject } from 'vue'
 import { type BasicApplicationSchemaType } from '@/types/basic_apply.types'
 
+const emit = defineEmits(['success'])
 const isSubmitting = inject<BasicApplicationSchemaType['isSubmitting']>('isSubmitting')
 const onSubmit = inject<BasicApplicationSchemaType['onSubmit']>('onSubmit')
 const toast = useToast()
@@ -22,6 +23,7 @@ const handleSubmit = async () => {
       detail: 'Your submission has been received.',
       life: 4000
     })
+    emit('success')
   } catch (error: any) {
     if (error.type == 'frontend_error') return
     toast.add({

@@ -3,8 +3,8 @@
     <form class="form-container">
       <BasicName></BasicName>
       <BasicEmail></BasicEmail>
-      <BasicFileUpload></BasicFileUpload>
-      <BasicSubmit></BasicSubmit>
+      <BasicFileUpload :reset-field="resetField"></BasicFileUpload>
+      <BasicSubmit @success="resetField = true"></BasicSubmit>
     </form>
   </div>
 </template>
@@ -13,5 +13,8 @@
 import BasicName from './basic/BasicName.vue'
 import BasicEmail from './basic/BasicEmail.vue'
 import BasicFileUpload from './basic/BasicFileUpload.vue'
-import BasicSubmit from './basic/BasicSubmit.vue';
+import BasicSubmit from './basic/BasicSubmit.vue'
+import { ref } from 'vue'
+
+const resetField = ref(false)
 </script>

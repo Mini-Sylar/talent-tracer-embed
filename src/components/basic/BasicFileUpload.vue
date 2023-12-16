@@ -56,9 +56,13 @@
 
 <script setup lang="ts">
 import { usePrimeVue } from 'primevue/config'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { inject } from 'vue'
 import { type BasicApplicationSchemaType } from '@/types/basic_apply.types'
+
+const props = defineProps<{
+  resetField: boolean
+}>()
 
 const file = inject<BasicApplicationSchemaType['file']>('file')
 const errors = inject<BasicApplicationSchemaType['errors']>('errors')
@@ -82,6 +86,15 @@ const formatSize = (bytes: number) => {
 
   return `${formattedSize} ${sizes[i]}`
 }
+
+watch(
+  () => props.resetField,
+  (resetField) => {
+    if (resetField) {
+      fileUpload.value.clear()
+    }
+  }
+)
 </script>
 
 <style scoped></style>

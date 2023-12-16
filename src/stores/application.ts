@@ -2,7 +2,6 @@ import { defineStore, acceptHMRUpdate } from 'pinia'
 import { supabase } from '@/services/supabaseClient'
 import { type ApplicationData } from '@/types/submit_application.type'
 import { useAppStateStore } from '@/stores/app_state'
-import { type CustomField } from '@/types/custom_apply.types'
 
 export const useApplicationStore = defineStore('application', () => {
   const appStateStore = useAppStateStore()
