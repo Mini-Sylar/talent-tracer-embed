@@ -53,8 +53,11 @@
 
 <script setup lang="ts">
 import { usePrimeVue } from 'primevue/config'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
+const props = defineProps<{
+  resetField: boolean
+}>()
 const file = defineModel()
 const prime = usePrimeVue()
 const fileUpload = ref()
@@ -76,6 +79,15 @@ const formatSize = (bytes: number) => {
 
   return `${formattedSize} ${sizes[i]}`
 }
+
+watch(
+  () => props.resetField,
+  (resetField) => {
+    if (resetField) {
+      fileUpload.value.clear()
+    }
+  }
+)
 </script>
 
 <style scoped></style>

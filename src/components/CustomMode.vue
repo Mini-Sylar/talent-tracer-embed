@@ -17,7 +17,7 @@
           :class="{ 'p-invalid': errors[field.name] }"
           :placeholder="field.name"
           v-model="fields[field.name].value"
-          :errors="errors[field.name]"
+          :reset-field="resetField"
         ></CustomFileUpload>
         <!-- set up other components -->
         <small class="p-error">{{ errors[field.name] || '&nbsp;' }}</small>
@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import { useAppStateStore } from '@/stores/app_state'
 import { storeToRefs } from 'pinia'
-import { type ComputedRef } from 'vue'
+import { type ComputedRef, ref } from 'vue'
 import { useCustomSubmissionSchema } from '@/schemas/useCustomSubmission'
 import CustomFileUpload from '@/components/custom/CustomFileUpload.vue'
 import { type CustomField } from '@/types/custom_apply.types'
@@ -43,12 +43,13 @@ const appState = useAppStateStore()
 const { customFields } = storeToRefs(appState) as unknown as {
   customFields: ComputedRef<CustomField>
 }
-
+const resetField = ref(false)
 const { errors, fields, onSubmit, isSubmitting } = useCustomSubmissionSchema()
 
 const handleSubmit = async () => {
   try {
     onSubmit && (await onSubmit())
+    resetField.value = true
     toast.add({
       severity: 'success',
       summary: 'Success',
