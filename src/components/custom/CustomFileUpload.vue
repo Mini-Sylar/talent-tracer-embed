@@ -3,7 +3,6 @@
     <FileUpload
       ref="fileUpload"
       id="file"
-      :class="{ 'p-invalid': errors?.file }"
       name="file[]"
       accept="application/pdf"
       :maxFileSize="5000000"
@@ -49,7 +48,6 @@
         </div>
       </template>
     </FileUpload>
-    <small id="text-error" class="p-error">{{ errors?.file || '&nbsp;' }}</small>
   </div>
 </template>
 
@@ -58,10 +56,6 @@ import { usePrimeVue } from 'primevue/config'
 import { ref } from 'vue'
 
 const file = defineModel()
-const errors = defineProps({
-  type: Object,
-  default: () => ({})
-})
 const prime = usePrimeVue()
 const fileUpload = ref()
 const onSelect = (event: any) => {
