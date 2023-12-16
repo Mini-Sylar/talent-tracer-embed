@@ -15,18 +15,7 @@ import BasicName from './basic/BasicName.vue'
 import BasicEmail from './basic/BasicEmail.vue'
 import BasicFileUpload from './basic/BasicFileUpload.vue'
 import BasicSubmit from './basic/BasicSubmit.vue'
-import { useSubmissionSchema } from '@/schemas/useSubmissionSchema'
-import { provide } from 'vue'
 
-
-const { email, errors, file, isSubmitting, name, onSubmit } = useSubmissionSchema()
-
-provide('email', email)
-provide('errors', errors)
-provide('file', file)
-provide('name', name)
-provide('isSubmitting', isSubmitting)
-provide('onSubmit', onSubmit)
 </script>
 
 <style scoped>

@@ -44,6 +44,17 @@ import CustomMode from '@/components/CustomMode.vue'
 import { useAppStateStore } from '@/stores/app_state'
 import { storeToRefs } from 'pinia'
 import { useToast } from 'primevue/usetoast'
+import { useSubmissionSchema } from '@/schemas/useSubmissionSchema'
+import { provide } from 'vue'
+
+const { email, errors, file, isSubmitting, name, onSubmit, values } = useSubmissionSchema()
+
+provide('email', email)
+provide('errors', errors)
+provide('file', file)
+provide('name', name)
+provide('isSubmitting', isSubmitting)
+provide('onSubmit', onSubmit)
 
 const errorState = ref(false)
 const appStateStore = useAppStateStore()
