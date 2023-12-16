@@ -5,12 +5,12 @@
         <label class="form-label" :for="field.name" style="text-transform: capitalize">{{
           field.name
         }}</label>
-
+        <!-- @vue-skip -->
         <InputText
-          v-if="field.type == 'input'"
+          v-if="field.type == 'input' && fields[field.name]"
           :class="{ 'p-invalid': errors[field.name] }"
           :placeholder="field.name"
-          :value="fields[field.name].value?.value"
+          v-model="fields[field.name].value"
         ></InputText>
         <CustomFileUpload
           v-else-if="field.type == 'file'"

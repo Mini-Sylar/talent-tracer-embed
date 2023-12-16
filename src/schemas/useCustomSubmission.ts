@@ -58,7 +58,7 @@ export const useCustomSubmissionSchema = () => {
       resetForm()
       return response
     },
-    () => {
+    (errors) => {
       throw {
         type: 'frontend_error',
         errors
