@@ -29,9 +29,11 @@
         </template>
       </Suspense>
     </div>
-    <div>
+    <div class="submission-container">
+      <h2 style="text-align: center">Apply Now</h2>
       <CustomMode v-if="isCustomMode"></CustomMode>
       <BasicSubmissionForm v-else></BasicSubmissionForm>
+      <BasicSubmit></BasicSubmit>
     </div>
   </div>
 </template>
@@ -41,6 +43,7 @@ import { onErrorCaptured, ref } from 'vue'
 import BasicSubmissionForm from '@/components/BasicSubmissionForm.vue'
 import JobDescription from '@/components/other/JobDescription.vue'
 import CustomMode from '@/components/CustomMode.vue'
+import BasicSubmit from '@/components/basic/BasicSubmit.vue'
 import { useAppStateStore } from '@/stores/app_state'
 import { storeToRefs } from 'pinia'
 import { useToast } from 'primevue/usetoast'
@@ -85,5 +88,10 @@ onErrorCaptured((error) => {
   flex-direction: column;
   gap: 2rem;
   margin-top: 2rem;
+}
+
+.submission-container {
+  width: min(100%, 800px);
+  margin: 0 auto;
 }
 </style>
